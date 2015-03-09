@@ -1,0 +1,63 @@
+body,html{font-family:sans-serif;margin:0;padding:0;width:100%;height:100%;color:white;font-size: 0}
+a{text-decoration: none;}
+
+/* banner */
+#WAHbanner{width: 100%; margin: 0;padding: 10px; background-color: #9DA3B4;color: white; display: block;position: fixed; top: 0;left: 0; text-decoration: none;font-size: 12px;}
+#WAHbanner:hover{ background-color: #B7BDCF;cursor: pointer;}
+#WAHbannerClose{color:white;background-color:rgb(221,71,71);width:15px;height:15px;display:inline-block;position:absolute;right:30px;border-radius:10px;text-align:center;font:12px sans-serif;line-height:15px;}
+#WAHbannerClose:hover{background-color: rgb(240, 76, 76);cursor: pointer;}
+
+/* hide n'show */
+.hide{opacity: 0;}
+.disable{display: none!important;}
+
+/* player global */
+.player{height: 100vh; white-space: nowrap; margin: 0; padding: 0; top: 0; float: left;position: relative;}
+.playerScreen{width: 100vw;height: 100%;font-size: 13px;position: relative;display: inline-block;vertical-align: top}
+.player{background: rgb(180,180,180);}
+.player:nth-child(4n+1){background-color: #7B98F0;}
+.player:nth-child(4n+2){background-color: #E27AF0;}
+.player:nth-child(4n+3){background-color: #F36868;}
+.player:nth-child(4n+4){background-color: #F3A858;}
+
+body{overflow: hidden;}
+
+/* nameTag */
+.nameTag{
+	position: absolute;
+	bottom: 30px;left: 30px;
+	font-size: 17px;
+}
+
+/* screen 1, round buttons */
+.buttonBox{
+	display: inline-block;
+	transform:translate(-50%, -50%);
+	position: absolute;
+	top: 50%;left: 50%;
+}
+.bigButton{
+	width: 80px;
+	height: 80px;
+	border-radius: 50px;
+	display: inline-block;
+	background-color: rgba(255,255,255,0.5);
+	text-align: center;
+	line-height: 80px;
+	color: white;
+	text-transform: uppercase;
+	font-size: 17px;
+	margin: 8px;
+}
+
+/* screen 2, bumps+bumps/minute */
+.screen2 .lineWrap{display: flex; justify-content:space-between; align-items:baseline; text-transform: capitalize; margin-top: -15px; }
+.screen2 .legend{font-size: 2em; margin-left: 30px;}
+.screen2 .value{font-size: 7em;}
+.screen2 .wrapper{transform:translate(-50%, -50%); top: 50%;left: 50%;position: absolute;}
+
+.screen3 .legend{margin: 20px;font-size: 4em}
+.screen3 .value{font-size: 13em;transform:translate(0, -45%);position: absolute;top: 50%;right: 0;margin-right: 40px}
+
+.screen4 .legend{font-size: 2em;position: absolute;top:0;right: 0px;margin: 35px 20px}
+.screen4 .value{font-size: 13em;transform:translate(-50%, -45%);position: absolute;top: 50%;left: 50%;margin-right: 40px}
