@@ -29,8 +29,6 @@ function setup(){
 
 	players = ["play1", "play2", "play3"];
 	for (var i = 0; i < players.length; i++) document.getElementById("players").appendChild(generatePlayer(players[i]));
-
-	
 }
 
 

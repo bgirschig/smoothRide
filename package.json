@@ -14,6 +14,7 @@
     "gulp-concat": "^2.5.2",
     "gulp-livereload": "^3.8.0",
     "gulp-manifest": "file:../../../../Users/bastienGirschig/Documents/tools/web/node/modifiedModules/gulp-manifest",
+    "gulp-uglify": "^1.1.0",
     "gulp-watch": "^4.1.1"
   }
 }
