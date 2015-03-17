@@ -1,27 +1,20 @@
 function generatePlayer(name){
-	player = WAH.read("player_"+name);
-	if(player==null) player = {
-		StrongestBump:0,
-		Smoothness:0,
-		Duration:0,
-		Bumps:0
-	};
-	var player = document.createElement("div");
-	player.className = "player";
-	player.appendChild(generate("div", name, {"class":"nameTag"}));
+	var globalNode = document.createElement("div");
+	globalNode.className = "player";
+	globalNode.appendChild(generate("div", name, {"class":"nameTag"}));
 
 	var playerScreen1 = generate("div", "", {"class":"playerScreen screen1"});
-	player.appendChild(playerScreen1);
+	globalNode.appendChild(playerScreen1);
 
 	var btnBox = generate("div", "", {"class":"buttonBox"});
 	playerScreen1.appendChild(btnBox);
 	
-	btnBox.appendChild(generate("a", "start", {"class":"bigButton", "onclick":startRecord, "href":"#"}));
-	btnBox.appendChild(generate("a", "reset", {"class":"bigButton", "onclick":resetRecord, "href":"#"}));
-	btnBox.appendChild(generate("a", "x", {"class":"bigButton", "onclick":deletePlayer, "href":"#"}));
+	btnBox.appendChild(generate("a", "start", {"class":"bigButton record", "href":"#"}));
+	btnBox.appendChild(generate("a", "reset", {"class":"bigButton reset", "href":"#"}));
+	btnBox.appendChild(generate("a", "x", {"class":"bigButton delete", "href":"#"}));
 
 	var playerScreen2 = generate("div", "", {"class":"playerScreen screen2"});
-	player.appendChild(playerScreen2);
+	globalNode.appendChild(playerScreen2);
 	var bumps = generate("div", "", {"class":"bumps lineWrap"});
 	bumps.appendChild(generate("div", "0", {"class":"value"}));
 	bumps.appendChild(generate("div", "bumps", {"class":"legend"}));
@@ -37,21 +30,18 @@ function generatePlayer(name){
 	var playerScreen3 = generate("div", "", {"class":"playerScreen screen3"});
 	playerScreen3.appendChild(generate("div", "Smoothness", {"class":"legend"}));
 	playerScreen3.appendChild(generate("div", "0", {"class":"value"}));
-	player.appendChild(playerScreen3);
+	globalNode.appendChild(playerScreen3);
 
 	var playerScreen4 = generate("div", "", {"class":"playerScreen screen4"});
 	playerScreen4.appendChild(generate("div", "Strongest bump", {"class":"legend"}));
 	playerScreen4.appendChild(generate("div", "0", {"class":"value"}));
-	player.appendChild(playerScreen4);
+	globalNode.appendChild(playerScreen4);
 
-	return player;
+	return globalNode;
 }
 function generate(type, content, attributes){
 	var el = document.createElement(type);
 	el.appendChild(document.createTextNode(content));
-	for (var key in attributes){
-		if(key=="onclick") el.onclick = attributes[key];
-		else el.setAttribute(key, attributes[key]);
-	}
+	for (var key in attributes) el.setAttribute(key, attributes[key]);
 	return el;
 }

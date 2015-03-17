@@ -47,3 +47,8 @@ function initCurrent(e){
 	currentPlayer = parseInt(body.scrollTop/body.offsetHeight);
 	currentScreen = parseInt(body.scrollLeft/body.offsetWidth);
 }
+function scrollHandler(e){
+	for (var i = 0; i < nameTags.length; i++) {
+		nameTags[i].style.left = body.scrollLeft+25+"px";
+	};
+}

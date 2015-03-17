@@ -67,21 +67,57 @@ MetaAngle.prototype.update = function(newAngle){
 	}
 	this.smoothedLinearAngle += (this.linearAngle - this.smoothedLinearAngle) / this.smoothStrength;
 }
-
 MetaAngle.prototype.set = function(angle){
 	this.linearAngle = angle;
 	this.pAngle = angle;
 	this.smoothedLinearAngle = angle;
 }
 
-
-function UVector(_x,_y){
+function UVector(_x,_y,_z){
 	if(typeof _x === "undefined" || _x === null) this.x = 0;
 	else this.x = _x;
 	if(typeof _y === "undefined" || _y === null) this.y = 0;
 	else this.y = _y;
+	if(typeof _z === "undefined" || _z === null) this.z = 0;
+	else this.z = _z;
 	return this;
 }
+UVector.prototype.set = function(x,y,z){
+	if(typeof x !== "undefined" && x !== null) this.x = x;
+	if(typeof y !== "undefined" && y !== null) this.y = y;
+	if(typeof z !== "undefined" && z !== null) this.z = z;
+}
+UVector.prototype.add = function(v2){
+	this.x += v2.x;
+	this.y += v2.y;
+	this.z += v2.z;
+}
+UVector.add = function(v1, v2){return new UVector(v1.x+v2.x, v1.y+v2.y, v1.z+v2.z);}
+UVector.prototype.sub = function(v2){
+	this.x -= v2.x;
+	this.y -= v2.y;
+	this.z -= v2.z;
+}
+UVector.sub = function(v1, v2){return new UVector(v1.x-v2.x, v1.y-v2.y, v1.z-v2.z);}
+UVector.prototype.mult = function(val){
+	this.x *= val;
+	this.y *= val;
+	this.z *= val;
+}
+UVector.mult = function(v, val){return new UVector(v.x*val, v.y*val, v.z*val);}
+UVector.prototype.div = function(val){
+	this.x /= val;
+	this.y /= val;
+	this.z /= val;
+}
+UVector.div = function(v, val){return new UVector(v.x/val, v.y/val, v.z/val);}
+UVector.prototype.mag = function(){return Math.sqrt(Util.sq(this.x)+Util.sq(this.y)+Util.sq(this.z));}
+UVector.prototype.normalise = function(){
+	var m = this.mag();
+	this.set(this.x/mag, this.y/mag, this.z/mag);
+}
+UVector.prototype.copy = function(){return new UVector(this.x, this.y, this.z);}
+
 
 if(typeof HTMLElement =='function' || typeof HTMLElement == 'object'){
 	if(typeof(HTMLElement.prototype.addClass)==='undefined'){
