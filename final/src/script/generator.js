@@ -1,6 +1,6 @@
-function generatePlayer(name){
+function generatePlayer(name, colorId){
 	var globalNode = document.createElement("div");
-	globalNode.className = "player";
+	globalNode.className = "player color"+colorId;
 	globalNode.appendChild(generate("div", name, {"class":"nameTag"}));
 
 	var playerScreen1 = generate("div", "", {"class":"playerScreen screen1"});
@@ -39,16 +39,38 @@ function generatePlayer(name){
 	return globalNode;
 }
 function generateNewPlayForm(){
-	var newPlayer = generate("div", "", {"class":"player"});
+	var newPlayer = generate("div", "", {"class":"player color0", "id":"newPlayerScreen"});
 	var formScreen = generate("div", "", {"class":"playerScreen"});
 	var form = generate("form", "", {"class":"newPlayerForm"});
 	
 	formScreen.appendChild(form);
-	form.appendChild(generate("input", "", {"type":"textinput"}));
+	var newPlayerInput = generate("input", "", {"type":"textinput","value":"Add player"});
+	form.appendChild(newPlayerInput);
+	newPlayerInput.onfocus = function(e){
+		e.preventDefault();
+		form.addClass("top");
+		newPlayerInput.value = "";
+		setTimeout(function(){gotoPlayer(players.length);}, 300); //FIXME: bug without this large delay (scrolls to wrong screen)
+	}
+	form.onsubmit = function(e){
+		e.preventDefault();
+		players.push(new Player(newPlayerInput.value));
+		newPlayerInput.blur();
+		setTimeout(function(){gotoPlayer(players.length-1);gotoScreen(0)}, 300); //FIXME
+		setFormColor();
+		save();
+	}
+	newPlayerInput.onblur = function(e){
+		newPlayerInput.value = "Add player";
+		form.removeClass("top");
+		console.log(form.className);
+	}
 	newPlayer.appendChild(formScreen);
-	// playerScreen1.appendChild(generate("div", "Smoothness", {"class":"legend"}));
-	// playerScreen1.appendChild(generate("div", "0", {"class":"value"}));
 	return newPlayer;
+}
+function setFormColor(){
+	var newPlayer = document.getElementById("newPlayerScreen");
+	newPlayer.className = newPlayer.className.replace(/color\d+/, "color"+((players.length>0)?(players[players.length-1].colorId+1)%4:0));
 }
 function generate(type, content, attributes){
 	var el = document.createElement(type);

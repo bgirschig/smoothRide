@@ -15,10 +15,15 @@ a{text-decoration: none;}
 .player{height: 100vh; white-space: nowrap; margin: 0; padding: 0; top: 0; float: left;position: relative;}
 .playerScreen{width: 100vw;height: 100%;font-size: 13px;position: relative;display: inline-block;vertical-align: top}
 .player{background: rgb(180,180,180);}
-.player:nth-child(4n+1){background-color: #7B98F0;}
-.player:nth-child(4n+2){background-color: #E27AF0;}
-.player:nth-child(4n+3){background-color: #F36868;}
-.player:nth-child(4n+4){background-color: #F3A858;}
+
+.color0{background-color: #7B98F0;}
+.color1{background-color: #E27AF0;}
+.color2{background-color: #F36868;}
+.color3{background-color: #F3A858;}
+/*.player:nth-child(4n+1){background-color: #7B98F0;}*/
+/*.player:nth-child(4n+2){background-color: #E27AF0;}*/
+/*.player:nth-child(4n+3){background-color: #F36868;}*/
+/*.player:nth-child(4n+4){background-color: #F3A858;}*/
 
 body{overflow: hidden;}
 
@@ -79,9 +84,13 @@ input{
 	text-decoration: none;
 	text-align: center;
 }
+.newPlayerForm.top{
+	top: 40px;
+}
 .newPlayerForm{
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -60%);
+	transition: top 0.1s ease-in-out;
 }

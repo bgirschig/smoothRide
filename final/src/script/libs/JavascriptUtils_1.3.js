@@ -150,9 +150,7 @@ if(typeof HTMLElement =='function' || typeof HTMLElement == 'object'){
 
 	if(typeof(HTMLElement.prototype.removeClass)==='undefined'){
 		HTMLElement.prototype.removeClass = function(val){
-			this.className = this.className.replace(" "+val, "");
-			this.className = this.className.replace(val+" ", "");
-			this.className = this.className.replace(val, "");
+			this.className = this.className.replace(new RegExp("(\w*\s{1})?\s*"+val+"\s*(.*)", 'g'), "$1$2");
 		}
 	}
 

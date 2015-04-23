@@ -14,7 +14,7 @@ function onMove(e){
 	var deltaX = startTouch.x - e.changedTouches[0].clientX;
 
 	if(Math.abs(deltaY)>Math.abs(deltaX)) body.scrollTop = startScroll.y+startTouch.y-e.changedTouches[0].clientY;
-	else body.scrollLeft = startScroll.x+startTouch.x-e.changedTouches[0].clientX;
+	else if(currentPlayer<players.length)body.scrollLeft = startScroll.x+startTouch.x-e.changedTouches[0].clientX;
 }
 
 function snapScroll(e){
@@ -42,11 +42,14 @@ function gotoScreen(id){
 	if(typeof id == "number") currentScreen = Util.constrain(id, 0, playerScreens[0].childNodes.length-2);
 	TweenLite.to(body, scrollSpeed, {scrollTo:{x:currentScreen*body.offsetWidth}, ease:Power2.easeOut});
 }
+function initCurrent(e){
+	window.removeEventListener("scroll", initCurrent);
+	currentPlayer = parseInt(body.scrollTop/body.offsetHeight);
+	currentScreen = parseInt(body.scrollLeft/body.offsetWidth);
+}
 function scrollHandler(e){
-	for (var i = 0; i < nameTags.length; i++) {
-		nameTags[i].style.left = body.scrollLeft+25+"px";
-	};
+	for (var i = 0; i < nameTags.length; i++) nameTags[i].style.left = body.scrollLeft+25+"px";
+	document.getElementById("newPlayerScreen").style.marginLeft = body.scrollLeft+"px";
 }
 function resizeHandler(e){
-	console.log(e);
 }

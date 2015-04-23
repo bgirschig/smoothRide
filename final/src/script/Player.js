@@ -1,7 +1,9 @@
-var Player = function(name){
+var Player = function(name, colorId){
 	// displayVars
 	this.name = name;
-	this.domNode = generatePlayer(name);
+	if(players.length>0) this.colorId = colorId || (players[players.length-1].colorId+1)%4;
+	else this.colorId = colorId || 0;
+	this.domNode = generatePlayer(name, this.colorId);
 
 	// buttons
 	this.buttonsNodes = this.domNode.getElementsByClassName("bigButton");
@@ -13,21 +15,20 @@ var Player = function(name){
 	this.bumps = [];
 	this.smoothness = 0;
 	this.strongest = 0;
-	this.startTime = 0;
 	this.totalTime = 0;
+	this.prevTime = 0;
 
-	document.getElementById("players").appendChild(this.domNode);
+	document.getElementById("players").insertBefore(this.domNode, document.getElementById("newPlayerScreen"));
 }
 
 Player.prototype.record = function(e){
 	e.preventDefault();
 	if(!this.recording){
-		console.log("start");
 		Analyser.attach(this);
 		Analyser.start();
 		this.recording = true;
-		this.startTime = Date.now();
-		
+		this.prevTime = Date.now();
+		gotoScreen(1);
 		this.buttonsNodes[0].innerHTML = "stop";
 	}
 	else{
@@ -37,9 +38,8 @@ Player.prototype.record = function(e){
 		this.buttonsNodes[0].innerHTML = "start";
 	}
 }
-Player.prototype.addBump = function(value){
-	this.bumps.push(value);
-}
+Player.prototype.addBump = function(value){ this.bumps.push(value); }
+
 Player.prototype.addData = function(value, bump){
 	if(bump){
 		this.bumps.push(value);
@@ -49,9 +49,9 @@ Player.prototype.addData = function(value, bump){
 	this.updateDisplay();
 }
 Player.prototype.updateDisplay = function(){
+	this.totalTime += Date.now()-this.prevTime; this.prevTime = Date.now();
 	this.domNode.querySelector(".bumps .value").innerHTML = this.bumps.length;
-
-	var bumpsMin = Util.round(this.bumps.length/((Date.now()-this.startTime)/60000), 2)
+	var bumpsMin = Util.round(this.bumps.length/(this.totalTime/60000), 2)
 	if(isNaN(bumpsMin)) bumpsMin = 0;
 	this.domNode.querySelector(".bumpsMinute .value").innerHTML = bumpsMin.toFixed(1);
 	this.domNode.querySelector(".smoothness .value").innerHTML = (100/(bumpsMin+1)).toFixed(1);
@@ -64,12 +64,25 @@ Player.prototype.reset = function(e){
 	this.bumps = [];
 	this.smoothness = 0;
 	this.strongest = 0;
-	this.startTime = Date.now();
+	this.prevTime = Date.now();
+	this.totalTime = 0;
 	
 	this.updateDisplay();
 	if(this.recording) Analyser.currentlyRecodingPlayer = null;
 }
 Player.prototype.deletePlayer = function(e){
 	e.preventDefault();
+	
+	document.getElementById("players").removeChild(this.domNode);
+	for(var i=0; i<players.length; i++) if(players[i]==this) players.splice(i,1);
+	
 	if(this.recording) Analyser.currentlyRecodingPlayer = null;
+	delete this;
+	
+	setFormColor();		//update the background color of the 'new player' page
+	save();
+}
+
+Player.prototype.stringify = function(){
+	return '{"name":"'+this.name+'", "colorId":"'+this.colorId+'"}';
 }
