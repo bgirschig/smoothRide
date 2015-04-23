@@ -1,10 +1,10 @@
 ##todo
 [X] save data
-[-] fix bug on focus input (fixed with delay)
+[-] fix bug on focus input (tepoary fix with delay)
 [x] auto scroll to first screen on start
 [x] remove player
 [x] color bugs
-[-] analysis bug on pause
+[X] analysis bug on pause
 
 #Web app, with WAH
 Tutorial on appcache [here](http://www.html5rocks.com/en/tutorials/appcache/beginner/)

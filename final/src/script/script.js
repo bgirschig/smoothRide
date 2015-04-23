@@ -13,7 +13,7 @@ function setup(){
 	playerScreens = document.getElementsByClassName("player");
 	nameTags = document.getElementsByClassName("nameTag");
 	
-	WAH.init({"updateIntervalLength":0, "silentUpdate":false});
+	WAH.init({"updateIntervalLength":1200000, "silentUpdate":false});
 	Analyser.init();
 
 	window.addEventListener("touchstart", onStart);
@@ -39,6 +39,7 @@ function save(){
 	WAH.write("players", "["+result.join(",")+"]");
 }
 function playerDataParser(data){
+	if(data == null) return [];
 	return JSON.parse(data);
 }
 

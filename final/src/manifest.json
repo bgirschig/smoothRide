@@ -1,7 +1,7 @@
 {
   "name": "Smooth Ride",
-  "description": "a game measuring how smooth your bike ride (or whatever) was",
-  "version": "1.0.0",
+  "description": "This app was initially designed to help penguins measure their smoothness on the 'slide and jump' ramps. It can, however be used for a great many other things, like testing your performance at dodging potholes on your bike",
+  "version": "1.0.1",
   "icons": [
     {
       "src": "assets/icon-36.png",
@@ -10,8 +10,8 @@
       "density": "0.75"
     },
     {
-      "src": "assets/icon-48.png",
-      "sizes": "48x48",
+      "src": "assets/icon-46.png",
+      "sizes": "46x46",
       "type": "image/png",
       "density": "1.0"
     },
@@ -28,7 +28,7 @@
       "density": "2.0"
     },
     {
-      "src": "assets/icon-144.png",
+      "src": "assets/Icon-72@2x.png",
       "sizes": "144x144",
       "type": "image/png",
       "density": "3.0"

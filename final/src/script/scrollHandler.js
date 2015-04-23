@@ -14,7 +14,7 @@ function onMove(e){
 	var deltaX = startTouch.x - e.changedTouches[0].clientX;
 
 	if(Math.abs(deltaY)>Math.abs(deltaX)) body.scrollTop = startScroll.y+startTouch.y-e.changedTouches[0].clientY;
-	else if(currentPlayer<players.length)body.scrollLeft = startScroll.x+startTouch.x-e.changedTouches[0].clientX;
+	else if(currentPlayer<players.length) body.scrollLeft = startScroll.x+startTouch.x-e.changedTouches[0].clientX;
 }
 
 function snapScroll(e){
