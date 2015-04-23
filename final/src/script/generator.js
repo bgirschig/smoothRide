@@ -26,18 +26,29 @@ function generatePlayer(name){
 	wrapper.appendChild(bumpsMinute);
 	playerScreen2.appendChild(wrapper);
 
-
-	var playerScreen3 = generate("div", "", {"class":"playerScreen screen3"});
+	var playerScreen3 = generate("div", "", {"class":"playerScreen screen3 smoothness"});
 	playerScreen3.appendChild(generate("div", "Smoothness", {"class":"legend"}));
 	playerScreen3.appendChild(generate("div", "0", {"class":"value"}));
 	globalNode.appendChild(playerScreen3);
 
-	var playerScreen4 = generate("div", "", {"class":"playerScreen screen4"});
+	var playerScreen4 = generate("div", "", {"class":"playerScreen screen4 strongest"});
 	playerScreen4.appendChild(generate("div", "Strongest bump", {"class":"legend"}));
 	playerScreen4.appendChild(generate("div", "0", {"class":"value"}));
 	globalNode.appendChild(playerScreen4);
 
 	return globalNode;
+}
+function generateNewPlayForm(){
+	var newPlayer = generate("div", "", {"class":"player"});
+	var formScreen = generate("div", "", {"class":"playerScreen"});
+	var form = generate("form", "", {"class":"newPlayerForm"});
+	
+	formScreen.appendChild(form);
+	form.appendChild(generate("input", "", {"type":"textinput"}));
+	newPlayer.appendChild(formScreen);
+	// playerScreen1.appendChild(generate("div", "Smoothness", {"class":"legend"}));
+	// playerScreen1.appendChild(generate("div", "0", {"class":"value"}));
+	return newPlayer;
 }
 function generate(type, content, attributes){
 	var el = document.createElement(type);
