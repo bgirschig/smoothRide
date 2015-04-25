@@ -17,8 +17,8 @@ gulp.task("copy", function(){
 
 gulp.task("js", function(){
   gulp.src("src/**/*.js")
-  // .pipe(concat("script/app.js"))
-  // .pipe(uglify())
+  .pipe(concat("script/app.js"))
+  .pipe(uglify())
   .pipe(gulp.dest('build'));
 });
 
